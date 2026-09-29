@@ -26,13 +26,13 @@ function Auth() {
       ? await supabase.auth.signInWithPassword({ email, password })
       : await supabase.auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin } });
     setBusy(false);
-    if (error) return toast.error(error.message);
-    if (mode === "up" && !data.session) return toast.success("Check your email to confirm your account.");
+    if (error) { toast.error(error.message); return; }
+    if (mode === "up" && !data.session) { toast.success("Check your email to confirm your account."); return; }
     nav({ to: "/console" });
   }
   async function google() {
     const r = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin });
-    if (r.error) return toast.error("Google sign-in failed");
+    if (r.error) { toast.error("Google sign-in failed"); return; }
     if (!r.redirected) nav({ to: "/console" });
   }
   return (

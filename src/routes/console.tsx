@@ -23,7 +23,7 @@ export const Route = createFileRoute("/console")({
 
 const RANGES = { "1h": 3600_000, "6h": 6 * 3600_000, "24h": 24 * 3600_000 } as const;
 
-function Tile({ label, value, unit, trace, color, tone, sub }: { label: string; value: string; unit: string; trace?: keyof import("@/lib/ciris/types").Telemetry; color?: string; tone?: "warning" | "critical"; sub?: string }) {
+function Tile({ label, value, unit, trace, color, tone, sub }: { label: string; value: string; unit: string; trace?: keyof import("@/lib/ciris/types").Telemetry; color?: string; tone?: "warning" | "critical" | undefined; sub?: string }) {
   const { live } = useCiris();
   return (
     <div className="flex flex-col rounded-md border border-border bg-surface p-4">

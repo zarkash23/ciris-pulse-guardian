@@ -39,7 +39,7 @@ export const Route = createFileRoute("/api/ai/diagnostics")({
           if (!match) return json({ error: "AI returned no result" }, 502);
           const parsed = JSON.parse(match[0]);
           if (!parsed.status || !Array.isArray(parsed.findings)) return json({ error: "AI returned an invalid result" }, 502);
-          parsed.findings = parsed.findings.slice(0, 6).map((f: Record<string, unknown>) => ({ ...f, confidence: Math.max(0, Math.min(100, Number(f.confidence) || 0)) }));
+          parsed.findings = parsed.findings.slice(0, 6).map((f: Record<string, unknown>) => ({ ...f, confidence: Math.max(0, Math.min(100, Number(f['confidence']) || 0)) }));
           return json({ result: parsed });
         } catch (e) {
           const status = (e as { statusCode?: number }).statusCode;

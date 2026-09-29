@@ -8,7 +8,7 @@ const hhmm = (t: number) => new Date(t).toLocaleTimeString([], { hour: "2-digit"
 type Key = "heartRate" | "spo2" | "skinTemp" | "battery" | "solarMw" | "activity";
 const ACT = ["Idle", "Walking", "Running"];
 
-export function HistoryChart({ data, dataKey, color, unit, domain }: { data: HistoryPoint[]; dataKey: Key; color: string; unit: string; domain?: [number | "auto", number | "auto"] }) {
+export function HistoryChart({ data, dataKey, color, unit, domain }: { data: HistoryPoint[]; dataKey: Key; color: string; unit: string; domain?: [number | "auto", number | "auto"] | undefined }) {
   const id = `g-${dataKey}`;
   return (
     <div className="h-44 w-full">
