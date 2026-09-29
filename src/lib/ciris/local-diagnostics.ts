@@ -56,10 +56,10 @@ export function runLocalDiagnostics(ctx: CirisContext, mode: DiagMode): DiagResu
 
   const rank: Record<DiagStatus, number> = { OK: 0, WARNING: 1, CRITICAL: 2 };
   f.sort((a, b) => rank[b.severity] - rank[a.severity]);
-  const status = f[0].severity;
+  const status = f[0]!.severity;
   return {
     status,
-    summary: f[0].detected,
+    summary: f[0]!.detected,
     findings: f,
     safety_note: "Device observations only — not a medical diagnosis. For concerning symptoms or readings, contact a healthcare professional or emergency services.",
   };
