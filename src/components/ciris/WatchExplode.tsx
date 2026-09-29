@@ -111,7 +111,7 @@ export function WatchExplode({ className }: { className?: string }) {
     return () => clearTimeout(id);
   }, [stage, playing]);
 
-  const s = STAGES[stage];
+  const s = STAGES[stage]!;
   const exploded = stage > 0 && stage < 8;
 
   return (

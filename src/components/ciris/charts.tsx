@@ -27,7 +27,7 @@ export function HistoryChart({ data, dataKey, color, unit, domain }: { data: His
             cursor={{ stroke: "var(--color-muted-foreground)", strokeDasharray: "3 3" }}
             content={({ active, payload }) => {
               if (!active || !payload?.length) return null;
-              const p = payload[0].payload as HistoryPoint;
+              const p = payload[0]!.payload as HistoryPoint;
               const v = p[dataKey];
               return (
                 <div className="rounded-sm border border-border bg-popover px-3 py-2 font-mono text-xs shadow-lg">
