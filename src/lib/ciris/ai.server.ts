@@ -14,7 +14,7 @@ export function json(body: unknown, status = 200) {
 export async function authenticate(request: Request) {
   const token = request.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
   if (!token) return null;
-  const supabase = createClient<Database>(process.env.SUPABASE_URL!, process.env.SUPABASE_PUBLISHABLE_KEY!, {
+  const supabase = createClient<Database>(process.env['SUPABASE_URL']!, process.env['SUPABASE_PUBLISHABLE_KEY']!, {
     global: { headers: { Authorization: `Bearer ${token}` } },
     auth: { persistSession: false, autoRefreshToken: false, storage: undefined },
   });
@@ -24,7 +24,7 @@ export async function authenticate(request: Request) {
 }
 
 export function createProvider(request: Request) {
-  const apiKey = process.env.LOVABLE_API_KEY;
+  const apiKey = process.env['LOVABLE_API_KEY'];
   if (!apiKey) return null;
   let runId = request.headers.get(RUN_ID)?.trim() || undefined;
   const provider = createOpenAI({

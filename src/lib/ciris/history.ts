@@ -32,20 +32,20 @@ export function generateHistory(end: number, endBattery: number): HistoryPoint[]
     const asleep = hour < 6.5 || hour > 23;
     if (r() < 0.04) act = asleep ? 0 : r() < 0.6 ? 1 : r() < 0.5 ? 2 : 0;
     if (asleep) act = 0;
-    const hrT = asleep ? 56 : [70, 100, 145][act];
+    const hrT = asleep ? 56 : ([70, 100, 145][act] ?? 70);
     hr += (hrT - hr) * 0.3 + (r() - 0.5) * 3;
     const daylight = Math.max(0, Math.sin(((hour - 6) / 14) * Math.PI));
     const solar = hour > 6 && hour < 20 ? daylight * (80 + r() * 90) : 0;
-    const load = 18 + [0, 6, 11][act];
+    const load = 18 + ([0, 6, 11][act] ?? 0);
     battery = Math.min(100, Math.max(3, battery + ((solar * 0.82 - load) * 120) / 3600 / 814 * 100 * 3));
     pts.push({
       t, heartRate: Math.round(hr), spo2: Math.round((97.6 - act * 0.6 + (r() - 0.5) * 0.8) * 10) / 10,
       skinTemp: Math.round((33 + act * 0.6 + (asleep ? -0.6 : 0) + (r() - 0.5) * 0.2) * 100) / 100,
       battery: Math.round(battery * 10) / 10, solarMw: Math.round(solar), activity: act,
-      state: asleep ? "Sleep" : ACT[act][0].toUpperCase() + ACT[act].slice(1),
+      state: asleep ? "Sleep" : (ACT[act] ?? "idle")[0]!.toUpperCase() + (ACT[act] ?? "idle").slice(1),
     });
   }
   // Align the tail with the live battery reading
-  const offset = endBattery - pts[pts.length - 1].battery;
+  const offset = endBattery - pts[pts.length - 1]!.battery;
   return pts.map((p, i) => ({ ...p, battery: Math.min(100, Math.max(0, Math.round((p.battery + offset * (i / n)) * 10) / 10)) }));
 }

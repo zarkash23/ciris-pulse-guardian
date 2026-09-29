@@ -22,7 +22,7 @@ export function runLocalDiagnostics(ctx: CirisContext, mode: DiagMode): DiagResu
   if (wantSensor && d.injected_faults.some((x) => x.includes("BME280")))
     add({ detected: "Barometric drift", evidence: `Pressure ${t.pressure} hPa rising steadily without matching weather change.`, subsystem: "Environment (BME280)", likely_cause: "Sensor drift or blocked vent.", recommended_action: "Recalibrate against a reference and check the vent membrane.", confidence: 74, severity: "WARNING" });
   if (wantSensor && d.injected_faults.some((x) => x.includes("BMI270")))
-    add({ detected: "Excessive motion noise", evidence: `Live acceleration peaked at ${ctx.history.summary.live_accelG?.max ?? t.accelG} g while activity is ${d.activity}.`, subsystem: "Motion (BMI270)", likely_cause: "Loose mounting or accelerometer fault — raises false fall-alert risk.", recommended_action: "Inspect enclosure and re-seat the sensor board.", confidence: 79, severity: "WARNING" });
+    add({ detected: "Excessive motion noise", evidence: `Live acceleration peaked at ${ctx.history.summary['live_accelG']?.max ?? t.accelG} g while activity is ${d.activity}.`, subsystem: "Motion (BMI270)", likely_cause: "Loose mounting or accelerometer fault — raises false fall-alert risk.", recommended_action: "Inspect enclosure and re-seat the sensor board.", confidence: 79, severity: "WARNING" });
 
   if (wantPower) {
     if (t.battery < 15)
