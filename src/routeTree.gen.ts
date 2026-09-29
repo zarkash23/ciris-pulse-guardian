@@ -10,33 +10,141 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ConsoleRouteImport } from './routes/console'
+import { Route as EngineeringRouteImport } from './routes/engineering'
+import { Route as SafetyRouteImport } from './routes/safety'
+import { Route as SupportRouteImport } from './routes/support'
+import { Route as TechnologyRouteImport } from './routes/technology'
+import { Route as ApiAiChatRouteImport } from './routes/api/ai/chat'
+import { Route as ApiAiDiagnosticsRouteImport } from './routes/api/ai/diagnostics'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConsoleRoute = ConsoleRouteImport.update({
+  id: '/console',
+  path: '/console',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EngineeringRoute = EngineeringRouteImport.update({
+  id: '/engineering',
+  path: '/engineering',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SafetyRoute = SafetyRouteImport.update({
+  id: '/safety',
+  path: '/safety',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SupportRoute = SupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TechnologyRoute = TechnologyRouteImport.update({
+  id: '/technology',
+  path: '/technology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAiChatRoute = ApiAiChatRouteImport.update({
+  id: '/api/ai/chat',
+  path: '/api/ai/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAiDiagnosticsRoute = ApiAiDiagnosticsRouteImport.update({
+  id: '/api/ai/diagnostics',
+  path: '/api/ai/diagnostics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/console': typeof ConsoleRoute
+  '/engineering': typeof EngineeringRoute
+  '/safety': typeof SafetyRoute
+  '/support': typeof SupportRoute
+  '/technology': typeof TechnologyRoute
+  '/api/ai/chat': typeof ApiAiChatRoute
+  '/api/ai/diagnostics': typeof ApiAiDiagnosticsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/console': typeof ConsoleRoute
+  '/engineering': typeof EngineeringRoute
+  '/safety': typeof SafetyRoute
+  '/support': typeof SupportRoute
+  '/technology': typeof TechnologyRoute
+  '/api/ai/chat': typeof ApiAiChatRoute
+  '/api/ai/diagnostics': typeof ApiAiDiagnosticsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/console': typeof ConsoleRoute
+  '/engineering': typeof EngineeringRoute
+  '/safety': typeof SafetyRoute
+  '/support': typeof SupportRoute
+  '/technology': typeof TechnologyRoute
+  '/api/ai/chat': typeof ApiAiChatRoute
+  '/api/ai/diagnostics': typeof ApiAiDiagnosticsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/console'
+    | '/engineering'
+    | '/safety'
+    | '/support'
+    | '/technology'
+    | '/api/ai/chat'
+    | '/api/ai/diagnostics'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/console'
+    | '/engineering'
+    | '/safety'
+    | '/support'
+    | '/technology'
+    | '/api/ai/chat'
+    | '/api/ai/diagnostics'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/console'
+    | '/engineering'
+    | '/safety'
+    | '/support'
+    | '/technology'
+    | '/api/ai/chat'
+    | '/api/ai/diagnostics'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
+  ConsoleRoute: typeof ConsoleRoute
+  EngineeringRoute: typeof EngineeringRoute
+  SafetyRoute: typeof SafetyRoute
+  SupportRoute: typeof SupportRoute
+  TechnologyRoute: typeof TechnologyRoute
+  ApiAiChatRoute: typeof ApiAiChatRoute
+  ApiAiDiagnosticsRoute: typeof ApiAiDiagnosticsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +156,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/console': {
+      id: '/console'
+      path: '/console'
+      fullPath: '/console'
+      preLoaderRoute: typeof ConsoleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/engineering': {
+      id: '/engineering'
+      path: '/engineering'
+      fullPath: '/engineering'
+      preLoaderRoute: typeof EngineeringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/safety': {
+      id: '/safety'
+      path: '/safety'
+      fullPath: '/safety'
+      preLoaderRoute: typeof SafetyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/support': {
+      id: '/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof SupportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/technology': {
+      id: '/technology'
+      path: '/technology'
+      fullPath: '/technology'
+      preLoaderRoute: typeof TechnologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ai/chat': {
+      id: '/api/ai/chat'
+      path: '/api/ai/chat'
+      fullPath: '/api/ai/chat'
+      preLoaderRoute: typeof ApiAiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ai/diagnostics': {
+      id: '/api/ai/diagnostics'
+      path: '/api/ai/diagnostics'
+      fullPath: '/api/ai/diagnostics'
+      preLoaderRoute: typeof ApiAiDiagnosticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
+  ConsoleRoute: ConsoleRoute,
+  EngineeringRoute: EngineeringRoute,
+  SafetyRoute: SafetyRoute,
+  SupportRoute: SupportRoute,
+  TechnologyRoute: TechnologyRoute,
+  ApiAiChatRoute: ApiAiChatRoute,
+  ApiAiDiagnosticsRoute: ApiAiDiagnosticsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
