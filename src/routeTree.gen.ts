@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiAiChatRouteImport } from './routes/api/ai/chat'
+import { Route as ApiAiDiagnosticsRouteImport } from './routes/api/ai/diagnostics'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAiChatRoute = ApiAiChatRouteImport.update({
+  id: '/api/ai/chat',
+  path: '/api/ai/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAiDiagnosticsRoute = ApiAiDiagnosticsRouteImport.update({
+  id: '/api/ai/diagnostics',
+  path: '/api/ai/diagnostics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/ai/chat': typeof ApiAiChatRoute
+  '/api/ai/diagnostics': typeof ApiAiDiagnosticsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/ai/chat': typeof ApiAiChatRoute
+  '/api/ai/diagnostics': typeof ApiAiDiagnosticsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/ai/chat': typeof ApiAiChatRoute
+  '/api/ai/diagnostics': typeof ApiAiDiagnosticsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/api/ai/chat' | '/api/ai/diagnostics'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/api/ai/chat' | '/api/ai/diagnostics'
+  id: '__root__' | '/' | '/api/ai/chat' | '/api/ai/diagnostics'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiAiChatRoute: typeof ApiAiChatRoute
+  ApiAiDiagnosticsRoute: typeof ApiAiDiagnosticsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/ai/chat': {
+      id: '/api/ai/chat'
+      path: '/api/ai/chat'
+      fullPath: '/api/ai/chat'
+      preLoaderRoute: typeof ApiAiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ai/diagnostics': {
+      id: '/api/ai/diagnostics'
+      path: '/api/ai/diagnostics'
+      fullPath: '/api/ai/diagnostics'
+      preLoaderRoute: typeof ApiAiDiagnosticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiAiChatRoute: ApiAiChatRoute,
+  ApiAiDiagnosticsRoute: ApiAiDiagnosticsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
