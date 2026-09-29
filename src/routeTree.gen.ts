@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ConsoleRouteImport } from './routes/console'
 import { Route as ApiAiChatRouteImport } from './routes/api/ai/chat'
 import { Route as ApiAiDiagnosticsRouteImport } from './routes/api/ai/diagnostics'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConsoleRoute = ConsoleRouteImport.update({
+  id: '/console',
+  path: '/console',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAiChatRoute = ApiAiChatRouteImport.update({
@@ -31,30 +37,34 @@ const ApiAiDiagnosticsRoute = ApiAiDiagnosticsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/console': typeof ConsoleRoute
   '/api/ai/chat': typeof ApiAiChatRoute
   '/api/ai/diagnostics': typeof ApiAiDiagnosticsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/console': typeof ConsoleRoute
   '/api/ai/chat': typeof ApiAiChatRoute
   '/api/ai/diagnostics': typeof ApiAiDiagnosticsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/console': typeof ConsoleRoute
   '/api/ai/chat': typeof ApiAiChatRoute
   '/api/ai/diagnostics': typeof ApiAiDiagnosticsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/ai/chat' | '/api/ai/diagnostics'
+  fullPaths: '/' | '/console' | '/api/ai/chat' | '/api/ai/diagnostics'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/ai/chat' | '/api/ai/diagnostics'
-  id: '__root__' | '/' | '/api/ai/chat' | '/api/ai/diagnostics'
+  to: '/' | '/console' | '/api/ai/chat' | '/api/ai/diagnostics'
+  id: '__root__' | '/' | '/console' | '/api/ai/chat' | '/api/ai/diagnostics'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ConsoleRoute: typeof ConsoleRoute
   ApiAiChatRoute: typeof ApiAiChatRoute
   ApiAiDiagnosticsRoute: typeof ApiAiDiagnosticsRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/console': {
+      id: '/console'
+      path: '/console'
+      fullPath: '/console'
+      preLoaderRoute: typeof ConsoleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/ai/chat': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ConsoleRoute: ConsoleRoute,
   ApiAiChatRoute: ApiAiChatRoute,
   ApiAiDiagnosticsRoute: ApiAiDiagnosticsRoute,
 }
