@@ -14,7 +14,171 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      chat_messages: {
+        Row: {
+          created_at: string
+          id: string
+          message_id: string
+          parts: Json
+          role: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message_id: string
+          parts: Json
+          role: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message_id?: string
+          parts?: Json
+          role?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      device_events: {
+        Row: {
+          created_at: string
+          id: string
+          message: string
+          severity: string
+          source: string
+          telemetry: Json | null
+          type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message: string
+          severity: string
+          source: string
+          telemetry?: Json | null
+          type: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message?: string
+          severity?: string
+          source?: string
+          telemetry?: Json | null
+          type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      diagnostics: {
+        Row: {
+          created_at: string
+          engine: string
+          id: string
+          mode: string
+          result: Json
+          status: string
+          subsystem: string | null
+          summary: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          engine: string
+          id?: string
+          mode: string
+          result: Json
+          status: string
+          subsystem?: string | null
+          summary: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          engine?: string
+          id?: string
+          mode?: string
+          result?: Json
+          status?: string
+          subsystem?: string | null
+          summary?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      emergency_contacts: {
+        Row: {
+          created_at: string
+          id: string
+          is_primary: boolean
+          name: string
+          phone: string
+          relation: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_primary?: boolean
+          name: string
+          phone: string
+          relation?: string | null
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_primary?: boolean
+          name?: string
+          phone?: string
+          relation?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      support_reports: {
+        Row: {
+          category: string
+          context: Json | null
+          created_at: string
+          description: string | null
+          email: string
+          id: string
+          issue: string
+          name: string
+          reference: string
+          user_id: string
+        }
+        Insert: {
+          category: string
+          context?: Json | null
+          created_at?: string
+          description?: string | null
+          email: string
+          id?: string
+          issue: string
+          name: string
+          reference: string
+          user_id?: string
+        }
+        Update: {
+          category?: string
+          context?: Json | null
+          created_at?: string
+          description?: string | null
+          email?: string
+          id?: string
+          issue?: string
+          name?: string
+          reference?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
